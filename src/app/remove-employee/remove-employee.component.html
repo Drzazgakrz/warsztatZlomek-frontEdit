@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="col-md-12">
+    <div id="site-background">
+      <div class="container">
+        <div class="row">
+          <form [formGroup]="removeEmployeeForm" (ngSubmit)="submit()">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" id="email" formControlName="email" class="form-control"
+                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email jest wymagany</div>
+                <div *ngIf="f.email.errors.pattern">Email jest nieprawidłowy</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="quitDate">Data zatrudnienia</label>
+              <input type="date" id="quitDate" formControlName="quitDate" class="form-control">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" id="submit">Usuń konto</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

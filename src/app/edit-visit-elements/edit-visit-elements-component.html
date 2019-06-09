@@ -1,0 +1,90 @@
+<div>
+  <div id="site-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 backgroundClear">
+          <div id="site-background">
+            <div *ngIf="carParts.length===0">
+              Brak części.
+            </div>
+            <div *ngIf="carParts.length!==0">
+              <label for="part">Wybierz część</label>
+              <select class="form-control" id="part">
+                <option value="-1">--Wybierz część--</option>
+                <option *ngFor="let part of carParts; let i = index" value="{{i}}">{{part.name}} {{part.producer}}
+                </option>
+              </select>
+              <button class="btn btn-primary" (click)="showCarPartsForm()">Edytuj tą część</button>
+            </div>
+            <div *ngIf="selectedValue!=='-1'">
+              <form [formGroup]="editCarPartForm" (ngSubmit)="submit()">
+                <div class="form-group">
+                  <label for="producerName">Producent</label>
+                  <input type="text" id="producerName" class="form-control" formControlName="producerName" [(ngModel)]="carPart.producer"
+                         [ngClass]="{ 'is-invalid': submitted && f.producerName.errors }">
+                  <div *ngIf="submitted && f.producerName.errors" class="invalid-feedback">
+                    <div *ngIf="f.producerName.errors.required">Nazwa producenta jest wymagana</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="partName">Nazwa</label>
+                  <input type="text" id="partName" class="form-control" formControlName="partName" [(ngModel)]="carPart.name"
+                         [ngClass]="{ 'is-invalid': submitted && f.partName.errors }">
+                  <div *ngIf="submitted && f.partName.errors" class="invalid-feedback">
+                    <div *ngIf="f.partName.errors.required">Nazwa części jest wymagana</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="tax">Podatek</label>
+                  <input type="number" id="tax" formControlName="tax" class="form-control" [(ngModel)]="carPart.tax"
+                         [ngClass]="{ 'is-invalid': submitted && f.tax.errors }">
+                  <div *ngIf="submitted && f.tax.errors" class="invalid-feedback">
+                    <div *ngIf="f.tax.errors.min">Podatek powinien być nieujemny</div>
+                    <div *ngIf="f.tax.errors.max">Podatek powinien być mniejszy od 25%</div>
+                  </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Zaktualizuj</button>
+              </form>
+            </div>
+
+          <div *ngIf="services.length===0">
+            Brak usług
+          </div>
+          <div *ngIf="services.length!==0">
+            <label for="part">Wybierz usługę</label>
+            <select class="form-control" id="service">
+              <option value="-1">--Wybierz usługę--</option>
+              <option *ngFor="let service of services; let i = index" value="{{i}}">{{service.name}}
+              </option>
+            </select>
+            <button class="btn btn-primary" (click)="showServicesForm()">Edytuj tą usługę</button>
+          </div>
+          <div *ngIf="selectedService!=='-1'">
+            <form [formGroup]="editServiceForm" (ngSubmit)="submitServicesForm()">
+              <div class="form-group">
+                <label for="serviceName">Nazwa</label>
+                <input type="text" id="serviceName" formControlName="serviceName" [(ngModel)]="service.serviceName"
+                       [ngClass]="{ 'is-invalid': serviceSubmitted && f.serviceName.errors }">
+                <div *ngIf="serviceSubmitted && f.serviceName.errors" class="invalid-feedback">
+                  <div *ngIf="f.serviceName.errors.required">Nazwa usługi jest wymagana</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="serviceTax">Podatek</label>
+                <input type="number" id="serviceTax" formControlName="serviceTax" [(ngModel)]="service.tax"
+                       [ngClass]="{ 'is-invalid': serviceSubmitted && f.serviceTax.errors }">
+                <div *ngIf="serviceSubmitted && f.serviceTax.errors" class="invalid-feedback">
+                  <div *ngIf="f.serviceTax.errors.min">Podatek powinien być nieujemny</div>
+                  <div *ngIf="f.serviceTax.errors.max">Podatek powinien być mniejszy od 25%</div>
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit">Zaktualizuj</button>
+            </form>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

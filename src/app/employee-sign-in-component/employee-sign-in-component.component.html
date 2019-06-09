@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div id="site-background">
+      <div class="col-md-12">
+        <div class=" text-center">
+          <form [formGroup]="employeeSignInForm" (ngSubmit)="submit()">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" id="email" formControlName="email" class="form-control input-width input-center"
+                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email jest wymagany</div>
+                <div *ngIf="f.email.errors.pattern">Email jest niepoprawny</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Hasło</label>
+              <input type="password" id="password" formControlName="password" class="form-control input-width input-center"
+                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
+                <div *ngIf="f.password.errors.pattern">Hasło jest niepoprawne</div>
+              </div>
+            </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary" id="submit">Zaloguj się</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
