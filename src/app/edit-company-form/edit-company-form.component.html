@@ -17,7 +17,7 @@
               <div class="form-group">
                 <label>Podaj nazwę</label>
                 <input type="text" formControlName="name" class="form-control"
-                       [ngClass]="{ 'is-invalid': submitted && f.name.errors }" disabled [(ngModel)]="company.name"/>
+                       [ngClass]="{ 'is-invalid': submitted && f.name.errors }" disabled [(ngModel)]="company.companyName"/>
                 <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                   <div *ngIf="f.name.errors.required">Nazwa firmy jest wymagana</div>
                 </div>

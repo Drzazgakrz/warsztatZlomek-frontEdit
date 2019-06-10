@@ -45,14 +45,14 @@ export class GeneratePDFService {
                     columns: [
                         [
                             {text: 'Sprzedawca: ', bold: true},
-                            {text: this.invoice.carServiceData.name},
+                            {text: this.invoice.carServiceData.companyName},
                             {text: 'ul.' + this.invoice.carServiceData.streetName + ' ' + this.invoice.carServiceData.buildingNum},
                             {text: this.invoice.carServiceData.zipCode + ' ' + this.invoice.carServiceData.cityName},
                             {text: 'NIP' + this.invoice.carServiceData.nip}
                         ],
                         [
                             {text: 'Nabywca: ', bold: true},
-                            {text: this.invoice.companyData.name},
+                            {text: this.invoice.companyData.companyName},
                             {text: 'ul.' + this.invoice.companyData.streetName + ' ' + this.invoice.companyData.buildingNum},
                             {text: this.invoice.companyData.zipCode + ' ' + this.invoice.companyData.cityName},
                             {text: 'NIP' + this.invoice.companyData.nip}
@@ -178,14 +178,14 @@ export class GeneratePDFService {
                     columns: [
                         [
                             {text: 'Sprzedawca: ', bold: true},
-                            {text: this.invoice.carServiceData.name},
+                            {text: this.invoice.carServiceData.companyName},
                             {text: 'ul.' + this.invoice.carServiceData.streetName + ' ' + this.invoice.carServiceData.buildingNum},
                             {text: this.invoice.carServiceData.zipCode + ' ' + this.invoice.carServiceData.cityName},
                             {text: 'NIP' + this.invoice.carServiceData.nip}
                         ],
                         [
                             {text: 'Nabywca: ', bold: true},
-                            {text: this.invoice.companyData.name},
+                            {text: this.invoice.companyData.companyName},
                             {text: 'ul.' + this.invoice.companyData.streetName + ' ' + this.invoice.companyData.buildingNum},
                             {text: this.invoice.companyData.zipCode + ' ' + this.invoice.companyData.cityName},
                             {text: 'NIP' + this.invoice.companyData.nip}
