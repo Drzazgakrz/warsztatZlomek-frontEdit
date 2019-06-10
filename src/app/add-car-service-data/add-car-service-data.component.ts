@@ -39,7 +39,7 @@ export class AddCarServiceDataComponent implements OnInit {
     }
     const company: AddCompanyModel = {
       email: f.email.value,
-      name: f.name.value,
+      companyName: f.companyName.value,
       nip: f.nip.value,
       cityName: f.cityName.value,
       streetName: f.streetName.value,

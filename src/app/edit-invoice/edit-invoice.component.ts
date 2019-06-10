@@ -67,7 +67,7 @@ export class EditInvoiceComponent implements OnInit {
     }
     const form: EditInvoice = {
       invoiceId: this.invoiceId,
-      companyName: this.invoice.companyData.name,
+      companyName: this.invoice.companyData.companyName,
       visitId: visit,
       paymentDate: this.invoice.paymentDate,
       methodOfPayment: payment,

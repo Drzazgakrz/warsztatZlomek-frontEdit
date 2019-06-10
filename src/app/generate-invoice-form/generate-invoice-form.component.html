@@ -6,7 +6,7 @@
           <div class="form-group">
             <label for="companyName">Nazwa firmy</label>
             <select id="companyName" formControlName="companyName" class="form-control">
-              <option *ngFor="let company of companiesNames" [ngValue]="company.name">{{company.name}}</option>
+              <option *ngFor="let company of companiesNames" [ngValue]="company.companyName">{{company.companyName}}</option>
             </select>
             <label for="date" >Data płatności</label>
             <input type="date" formControlName="date" id="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />

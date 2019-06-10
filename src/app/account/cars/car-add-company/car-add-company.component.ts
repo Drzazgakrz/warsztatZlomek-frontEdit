@@ -53,7 +53,7 @@ export class CarAddCompanyComponent implements OnInit {
       this.submitted = true;
 
       for ( const company of this.companies) {
-          if (company.name === this.f.companyName.value) {
+          if (company.companyName === this.f.companyName.value) {
               this.companyId = company.id;
           }
       }
