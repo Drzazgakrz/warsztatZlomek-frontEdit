@@ -133,7 +133,7 @@ export interface CompanyModel {
   zipCode?: string;
   email?: string;
   id?: number;
-  name?: string;
+  companyName?: string;
   nip?: string;
 }
 
@@ -149,8 +149,16 @@ export interface CarPartModel {
   accessToken: String;
 }
 
-export interface EditCompanyModel extends CompanyModel {
+export interface EditCompanyModel {
   id: number;
+  aptNum?: string;
+  buildingNum?: string;
+  cityName?: string;
+  streetName?: string;
+  zipCode?: string;
+  email?: string;
+  name?: string;
+  nip?: string;
   accessToken: string;
 }
 

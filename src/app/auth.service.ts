@@ -142,7 +142,7 @@ export class AuthService {
     }
 
     getCarBrands() {
-        return this.http.get<any>('http://127.0.0.1:8080/rest/car/getAllCarBrands')
+        return this.http.get<any>('http://127.0.0.1:8080/rest/car/getCarBrands')
             .pipe(map(cars => {
                 return cars;
             }));
@@ -271,7 +271,7 @@ export class AuthService {
         if (visit.accessToken == null) {
             return;
         }
-        return this.http.post<any>('http://127.0.0.1:8080/rest/visits/addEmptyVisit', visit)
+        return this.http.post<any>('http://127.0.0.1:8080/rest/visits/createEmpty', visit)
             .subscribe(
                 (data) => {
                     this.setExpirationDate();
@@ -526,7 +526,7 @@ export class AuthService {
         if (form.accessToken == null) {
             return;
         }
-        return this.http.post<any>('http://127.0.0.1:8080/rest/companies/getAllCompanies', form).pipe(map((result) => {
+        return this.http.post<any>('http://127.0.0.1:8080/rest/companies/getCompanies', form).pipe(map((result) => {
                 return result;
             }
         ));
@@ -606,7 +606,7 @@ export class AuthService {
         if (form.accessToken == null) {
             return;
         }
-        return this.http.post<any>('http://127.0.0.1:8080/rest/invoices/accept/' + form.proFormaInvoiceId, form)
+        return this.http.post<any>('http://127.0.0.1:8080/rest/invoices/addProForma', form)
             .pipe(map(result => {
                 return result;
             }));
@@ -690,7 +690,7 @@ export class AuthService {
         if (form.accessToken === null) {
             return;
         }
-        return this.http.post<any>('http://127.0.0.1:8080/rest/companies/getAllCompanies',
+        return this.http.post<any>('http://127.0.0.1:8080/rest/companies/getCompanies',
             form).pipe(map((result) => {
             return result;
         }));
