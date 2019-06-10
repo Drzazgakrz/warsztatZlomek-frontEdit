@@ -27,7 +27,7 @@
                   <td>{{visit.car.registrationNumber}}</td>
                   <td>{{visit.visitDate}}</td>
                   <ng-container *ngIf="visit.visitStatus == 'ACCEPTED'">
-                    <td><button class="btn btn-primary" (click)="changeStatus(visit.id, 'in progress')">Potwierdź odbiór</button></td>
+                    <td><button class="btn btn-primary" (click)="changeStatus(visit.id, 'in_progress')">Potwierdź odbiór</button></td>
                   </ng-container>
                   <ng-container *ngIf="visit.visitStatus == 'IN_PROGRESS'">
                     <td><button class="btn btn-primary" (click)="submitPickup(i)">Do odbioru</button></td>
