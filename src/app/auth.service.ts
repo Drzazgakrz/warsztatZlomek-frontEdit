@@ -291,7 +291,7 @@ export class AuthService {
         if (token.accessToken == null) {
             return;
         }
-        return this.http.post<any>('http://127.0.0.1:8080/rest/visits/employee/in_progress', token)
+        return this.http.post<any>('http://127.0.0.1:8080/rest/visits/notFinished', token)
             .pipe(map(visits => {
                 return visits;
             }));
