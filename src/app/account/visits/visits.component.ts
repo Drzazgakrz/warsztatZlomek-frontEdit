@@ -27,6 +27,7 @@ export class VisitsComponent implements OnInit {
           .subscribe(
               data => {
                   this.visits = data.visits;
+                  console.log(data);
                   for (let i = 0; i < data.visits.length; i++) {
                       const date = new Date(data.visits[i].visitDate);
                       data.visits[i].visitDate = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
