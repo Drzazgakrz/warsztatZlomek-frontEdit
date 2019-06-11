@@ -49,7 +49,7 @@
                   <label >Marka</label>
                   <select formControlName="carBrand" class="form-control">
                     <option>--Wybierz markę--</option>
-                    <option *ngFor="let carBrand of carsBrands">{{carBrand}}</option>
+                    <option *ngFor="let carBrand of carsBrands">{{carBrand.brandName}}</option>
                   </select>
                 </div>
                 <div class="form-group">

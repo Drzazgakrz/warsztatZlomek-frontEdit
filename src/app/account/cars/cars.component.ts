@@ -60,7 +60,7 @@ export class CarsComponent implements OnInit {
           .pipe(first())
           .subscribe(
               brands => {
-                  this.carsBrands = brands.brandNames;
+                  this.carsBrands = brands.brands;
               },
                 error => {
                   console.log(error);
