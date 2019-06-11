@@ -44,7 +44,7 @@
                     </td>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody *ngIf="visit.parts!==undefined">
                   <tr *ngFor="let part of visit.parts">
                     <td>
                       {{part.name}}
@@ -80,7 +80,7 @@
                     </td>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody *ngIf="visit.services!==undefined">
                   <tr *ngFor="let service of visit.services">
                     <td>
                       {{service.name}}

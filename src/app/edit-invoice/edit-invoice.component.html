@@ -18,7 +18,7 @@
             <label for="companyName">Nazwa firmy</label>
             <input type="text" formControlName="companyName" id="companyName" class="form-control"
                    [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }"
-                   [(ngModel)]="invoice.companyData.name"/>
+                   [(ngModel)]="invoice.companyData.companyName"/>
             <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
               <div *ngIf="f.companyName.errors.required">Nazwa firmy jest wymagana</div>
             </div>

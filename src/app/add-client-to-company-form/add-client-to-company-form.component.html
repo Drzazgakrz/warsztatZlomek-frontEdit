@@ -8,8 +8,8 @@
               <label for="select">Wybierz firmę</label>
               <select id="select" class="form-control">
                 <option value="">Wybierz firmę</option>
-                <option *ngFor="let company of companies" value="{{company.name}}">
-                  {{company.name}} {{company.nip}}
+                <option *ngFor="let company of companies" value="{{company.companyName}}">
+                  {{company.companyName}} {{company.nip}}
                 </option>
               </select>
               <div class="form-group">

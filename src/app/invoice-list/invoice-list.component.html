@@ -25,7 +25,7 @@
             <tr *ngFor="let invoice of invoices; let i = index;">
               <td>{{i+1}}</td>
               <td>{{invoice.dayOfIssue}}</td>
-              <td>{{invoice.companyData.name}}</td>
+              <td>{{invoice.companyData.companyName}}</td>
               <td>{{invoice.companyData.nip}}</td>
               <td>
                 <button class="btn btn-primary" (click)="load(i)">Pobierz</button>

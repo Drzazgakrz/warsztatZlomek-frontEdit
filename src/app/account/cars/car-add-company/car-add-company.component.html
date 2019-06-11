@@ -8,7 +8,7 @@
       <label >Nazwa firmy</label>
       <select formControlName="companyName" class="form-control">
         <option [ngValue]="undefined">--Wybierz firmę--</option>
-        <option *ngFor="let company of companies">{{company.name}}</option>
+        <option *ngFor="let company of companies">{{company.companyName}}</option>
       </select>
       <div class="selectError" *ngIf="submitted && selectError">
         <div>Proszę wybrać firmę</div>
