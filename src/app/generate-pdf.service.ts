@@ -118,7 +118,7 @@ export class GeneratePDFService {
             {text: 'Wartość brutto', fillColor: '#eeeeee'}
         ]);
 
-        this.invoice.positions.forEach(function (column) {
+        this.invoice.invoicePositions.forEach(function (column) {
             i = i + 1;
             const netP = column.netPrice.split('.', 2);
             const netPrc = netP[0] + '.' + netP[1].substr(0, 2);

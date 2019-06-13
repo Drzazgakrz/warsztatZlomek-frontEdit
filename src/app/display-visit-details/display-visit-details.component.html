@@ -27,77 +27,42 @@
                   </tbody>
                 </table>
                 <table class="table">
-                  <thead>
+                  <thead class="thead-dark">
                   <th>Części:</th>
+                  <th></th>
+                  </thead>
+                  <tbody *ngIf="visit.parts!==undefined">
                   <tr>
                     <td>
                       Nazwa części
                     </td>
                     <td>
-                      Cena
-                    </td>
-                    <td>
-                      Ilość
-                    </td>
-                    <td>
-                      Suma
+                      Producent
                     </td>
                   </tr>
-                  </thead>
-                  <tbody *ngIf="visit.parts!==undefined">
                   <tr *ngFor="let part of visit.parts">
                     <td>
                       {{part.name}}
                     </td>
                     <td>
-                      {{part.price}}
-                    </td>
-                    <td>
-                      {{part.count}}
-                    </td>
-                    <td>
-                      {{part.price*part.count | number:'1.2-2'}}
+                      {{part.producer}}
                     </td>
                   </tr>
                   </tbody>
                 </table>
 
                 <table class="table">
-                  <thead>
+                  <thead class="thead-dark">
                   <th>Usługi:</th>
-                  <tr>
-                    <td>
-                      Nazwa usługi
-                    </td>
-                    <td>
-                      Cena
-                    </td>
-                    <td>
-                      Ilość
-                    </td>
-                    <td>
-                      Suma
-                    </td>
-                  </tr>
                   </thead>
                   <tbody *ngIf="visit.services!==undefined">
                   <tr *ngFor="let service of visit.services">
                     <td>
                       {{service.name}}
                     </td>
-                    <td>
-                      {{service.price}}
-                    </td>
-                    <td>
-                      {{service.count}}
-                    </td>
-                    <td>
-                      {{service.price*service.count | number:'1.2-2'}}
-                    </td>
                   </tr>
                   </tbody>
                 </table>
-                <button class="btn btn-primary" (click)="createInvoice()">Wygeneruj fakturę</button>
               </div>
             </div>
           </div>

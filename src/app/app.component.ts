@@ -212,6 +212,10 @@ export interface VisitElementResponse {
   price: number;
 }
 
+export interface VisitPartResponse extends VisitElementResponse{
+  producer: string;
+}
+
 export interface VisitResponse {
   id: number;
   visitDate: string;
@@ -219,7 +223,7 @@ export interface VisitResponse {
   owners: UserData[];
   notVerifiedOwners: UserData[];
   visitStatus: String;
-  parts: VisitElementResponse[];
+  parts: VisitPartResponse[];
   services: VisitElementResponse[];
 }
 
@@ -291,7 +295,7 @@ export interface InvoiceResponse {
   serviceFinishDate: string;
   carServiceData: CompanyModel;
   companyData: CompanyModel;
-  positions: InvoicePositionResponse[];
+  invoicePositions: InvoicePositionResponse[];
 }
 
 export interface InvoicePositionResponse {

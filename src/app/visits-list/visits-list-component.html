@@ -14,7 +14,7 @@
                 <td>Lp.</td>
                 <td>Marka</td>
                 <td>Model</td>
-                <td>Numer rejestracyjny</td>
+                <td>Numer VIN</td>
                 <td>Data wizyty</td>
                 <td></td>
                 <td></td>
@@ -24,7 +24,7 @@
                 <td>{{i+1}}</td>
                 <td>{{visit.car.brandName}}</td>
                 <td>{{visit.car.model}}</td>
-                <td>{{visit.car.registrationNumber}}</td>
+                <td>{{visit.car.vin}}</td>
                 <td>{{visit.visitDate}}</td>
                 <button (click)="createInvoice(i)" class="btn btn-primary" style="margin-right: 10px">Generuj fakturę</button>
                 <button (click)="showMore(i)" class="btn btn-primary">Zobacz szczegóły</button>
