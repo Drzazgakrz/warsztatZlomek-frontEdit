@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent} from '@angular/common/http';
 import {
 
     AddCarModel,
@@ -35,7 +35,8 @@ import {
     AddServiceForm,
     GetVisitDetails
 } from './app.component';
-import {map} from 'rxjs/internal/operators';
+import {catchError, map} from 'rxjs/internal/operators';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -53,7 +54,7 @@ export class AuthService {
                     localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 }
                 return user;
-            }));
+              }));
     }
 
 
@@ -99,7 +100,18 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     getCars(token: TokenModel) {
@@ -107,7 +119,18 @@ export class AuthService {
             .pipe(map(cars => {
                 localStorage.setItem('currentUser', JSON.stringify(cars.accessToken.valueOf()));
                 return cars;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     updateClientData(client: ClientUpdateModel) {
@@ -115,14 +138,36 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     deleteUser(token: TokenModel) {
         return this.http.post<any>('http://127.0.0.1:8080/rest/client/remove', token)
             .pipe(map(user => {
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     getAllClientVisits(token: TokenModel) {
@@ -130,7 +175,18 @@ export class AuthService {
             .pipe(map(visits => {
                 localStorage.setItem('currentUser', JSON.stringify(visits.accessToken.valueOf()));
                 return visits;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     getFutureVisits(token: TokenModel) {
@@ -138,14 +194,36 @@ export class AuthService {
             .pipe(map(visits => {
                 localStorage.setItem('currentUser', JSON.stringify(visits.accessToken.valueOf()));
                 return visits;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     getCarBrands() {
         return this.http.get<any>('http://127.0.0.1:8080/rest/car/getCarBrands')
             .pipe(map(cars => {
                 return cars;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     addCar(car: AddCarModel) {
@@ -153,16 +231,38 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
-// cors jebie błędami
+
     deleteCar(id: CarIdModel) {
         return this.http.put<any>('http://127.0.0.1:8080/rest/car/' + id.carId, id)
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     editCar(car: CarEditModel) {
@@ -170,7 +270,18 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
 
@@ -179,7 +290,18 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     removeCoowner(owner: CoownerModel) {
@@ -187,7 +309,18 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
 // nie robiłem dodawania i usuwania samochodu z firmy
@@ -212,7 +345,18 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     removeVisit(visit: RemoveVisitModel) {
@@ -220,7 +364,18 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user.accessToken.valueOf()));
                 return user;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logout();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     getClientsCompanies(token: TokenModel) {
@@ -228,7 +383,18 @@ export class AuthService {
             .pipe(map(companies => {
                 localStorage.setItem('currentUser', JSON.stringify(companies.accessToken.valueOf()));
                 return companies;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     registerEmployee(registerEmployeeModel: RegisterEmployeeModel) {
@@ -284,7 +450,18 @@ export class AuthService {
                         this.setExpirationDate();
                     }
                 }
-            );
+            ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     getNotFinishedVisits(token: TokenModel) {
@@ -294,7 +471,18 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/visits/notFinished', token)
             .pipe(map(visits => {
                 return visits;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     getNewVisits(token: TokenModel) {
@@ -305,7 +493,18 @@ export class AuthService {
             .pipe(map(visits => {
                 console.log(visits);
                 return visits;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     getEmployeesVisits(token: TokenModel) {
@@ -315,7 +514,18 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/employee/visits', token)
             .pipe(map(visits => {
                 return visits;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     getAccessToken() {
@@ -349,7 +559,18 @@ export class AuthService {
                     this.setExpirationDate();
                 }
             }
-        );
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     addCarBrand(form: CarBrandModel) {
@@ -367,7 +588,18 @@ export class AuthService {
                     this.setExpirationDate();
                 }
             }
-        );
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     addCarPart(form: CarPartModel) {
@@ -385,7 +617,18 @@ export class AuthService {
                     this.setExpirationDate();
                 }
             }
-        );
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     addCompany(form: AddCompanyModel) {
@@ -403,7 +646,18 @@ export class AuthService {
                     this.setExpirationDate();
                 }
             }
-        );
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     addCarService(form: AddCompanyModel) {
@@ -421,7 +675,18 @@ export class AuthService {
                     this.setExpirationDate();
                 }
             }
-        );
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     addEmployeeToVisit(visit: AddEmployeeToVisit) {
@@ -432,7 +697,18 @@ export class AuthService {
             .pipe(map(visits => {
                 alert('Operacja została wykonana pomyślnie!');
                 return visits;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     editVisit(visit: SubmitVisitModel) {
@@ -443,7 +719,18 @@ export class AuthService {
             .pipe(map(visits => {
                 alert('Operacja została wykonana pomyślnie!');
                 return visits;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     generateInvoice(form: InvoiceForm, url) {
@@ -454,7 +741,18 @@ export class AuthService {
             .pipe(map(result => {
                 alert('Operacja została wykonana pomyślnie!');
                 return result;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     setExpirationDate() {
@@ -471,7 +769,18 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/visitElements', {'accessToken': this.getAccessToken()})
             .pipe(map(result => {
                 return result;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     editCarPart(form: EditCarPartModel) {
@@ -489,7 +798,18 @@ export class AuthService {
                     this.setExpirationDate();
                 }
             }
-        );
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     editService(form: ServiceModel) {
@@ -507,7 +827,18 @@ export class AuthService {
                     this.setExpirationDate();
                 }
             }
-        );
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
 
@@ -529,7 +860,18 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/companies/getCompanies', form).pipe(map((result) => {
                 return result;
             }
-        ));
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     getCompanyById(id: number) {
@@ -543,7 +885,18 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/companies/' + form.companyId, form).pipe(map((result) => {
                 return result;
             }
-        ));
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     editCompany(form: EditCompanyModel) {
@@ -561,7 +914,18 @@ export class AuthService {
                     this.setExpirationDate();
                 }
             }
-        );
+        ),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     getInvoices(url: string) {
@@ -573,8 +937,18 @@ export class AuthService {
         }
         return this.http.post<any>(url, form).pipe(map((result) => {
                 return result;
-            })
-        );
+            }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     getInvoice(id: number) {
@@ -587,7 +961,18 @@ export class AuthService {
         }
         return this.http.post<any>('http://127.0.0.1:8080/rest/invoice/getInvoiceDetails', form).pipe(map((result) => {
                 return result;
-            })
+            }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          )
         );
     }
 
@@ -599,7 +984,18 @@ export class AuthService {
             .pipe(map(result => {
                 alert('Operacja została wykonana pomyślnie!');
                 return result;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     acceptProFormaInvoice(form: AcceptProFormaInvoice) {
@@ -609,7 +1005,18 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/invoices/addProForma', form)
             .pipe(map(result => {
                 return result;
-            }));
+            }),
+              catchError(
+                (error: any, caught: Observable<HttpEvent<any>>) => {
+                  if (error.status === 401) {
+                    this.logoutEmployee();
+                    alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                    window.location.reload();
+                    return of(error);
+                  }
+                  throw error;
+                }
+              ));
     }
 
     addClientToCompany(form: ClientCompany) {
@@ -625,7 +1032,18 @@ export class AuthService {
                 if (result.accessToken !== null) {
                     this.setExpirationDate();
                 }
-            });
+            }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          );
     }
 
     getClientData(form: GetClientData) {
@@ -634,7 +1052,18 @@ export class AuthService {
         }
         return this.http.post<any>('http://127.0.0.1:8080/rest/client/' + form.username, form).pipe(map((result) => {
             return result;
-        }));
+        }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     removeClientFromCompany(form: ClientCompany) {
@@ -645,7 +1074,18 @@ export class AuthService {
             form).pipe(map((result) => {
             alert('Operacja została wykonana pomyślnie!');
             return result;
-        }));
+        }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     verifyOwnership(form: VerificationModel) {
@@ -655,7 +1095,18 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/car/verifyOwnership',
             form).pipe(map((result) => {
             return result;
-        }));
+        }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     addService(form: AddServiceForm) {
@@ -666,7 +1117,18 @@ export class AuthService {
             form).pipe(map((result) => {
             alert('Operacja została wykonana pomyślnie!');
             return result;
-        }));
+        }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     getVisitDetails(form: GetVisitDetails) {
@@ -676,14 +1138,36 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/visits/employeeVisit/' + form.visitId,
             form).pipe(map((result) => {
             return result;
-        }));
+        }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     checkCar(form) {
         return this.http.post<any>('http://127.0.0.1:8080/rest/visits/getAllCarVisits',
             form).pipe(map((result) => {
             return result;
-        }));
+        }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 
     getCompanies(form: TokenModel) {
@@ -693,6 +1177,17 @@ export class AuthService {
         return this.http.post<any>('http://127.0.0.1:8080/rest/companies/getCompanies',
             form).pipe(map((result) => {
             return result;
-        }));
+        }),
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              if (error.status === 401) {
+                this.logoutEmployee();
+                alert('Wystąpił błąd, nastąpiło wylogowanie !!!');
+                window.location.reload();
+                return of(error);
+              }
+              throw error;
+            }
+          ));
     }
 }
