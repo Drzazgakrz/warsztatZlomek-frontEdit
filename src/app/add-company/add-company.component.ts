@@ -38,7 +38,7 @@ export class AddCompanyComponent implements OnInit {
     }
     const company: AddCompanyModel = {
       email: f.email.value,
-      companyName: f.companyName.value,
+      companyName: f.name.value,
       nip: f.nip.value,
       cityName: f.cityName.value,
       streetName: f.streetName.value,

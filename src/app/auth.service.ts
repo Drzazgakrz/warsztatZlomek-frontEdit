@@ -635,7 +635,7 @@ export class AuthService {
         if (form.accessToken == null) {
             return;
         }
-        return this.http.post<any>('http://127.0.0.1:8080/rest/companies/addCompany', form).subscribe(
+        return this.http.post<any>('http://127.0.0.1:8080/rest/companies/', form).subscribe(
             (data) => {
                 this.setExpirationDate();
                 alert('Dodano firmę!');
