@@ -15,7 +15,6 @@
                   <td>Lp.</td>
                   <td>Marka</td>
                   <td>Model</td>
-                  <td>Numer rejestracyjny</td>
                   <td>Data wizyty</td>
                   <td></td>
                 </tr>
@@ -24,7 +23,6 @@
                   <td>{{i}}</td>
                   <td>{{visit.car.brandName}}</td>
                   <td>{{visit.car.model}}</td>
-                  <td>{{visit.car.registrationNumber}}</td>
                   <td>{{visit.visitDate}}</td>
                   <ng-container *ngIf="visit.visitStatus == 'ACCEPTED'">
                     <td><button class="btn btn-primary" (click)="changeStatus(visit.id, 'in_progress')">Potwierdź odbiór</button></td>

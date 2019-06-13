@@ -14,7 +14,6 @@
                 <td>Lp.</td>
                 <td>Marka</td>
                 <td>Model</td>
-                <td>Numer rejestracyjny</td>
                 <td>Data wizyty</td>
                 <td>Status</td>
                 <td></td>
@@ -24,7 +23,6 @@
                 <td>{{i+1}}</td>
                 <td>{{visit.car.brandName}}</td>
                 <td>{{visit.car.model}}</td>
-                <td>{{visit.car.registrationNumber}}</td>
                 <td>{{visit.visitDate}}</td>
                 <td>{{visit.visitStatus}}</td>
                 <ng-container *ngIf="visit.visitStatus === 'Nowa'">
