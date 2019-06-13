@@ -512,7 +512,10 @@ export class AuthService {
 
 
     getEditVisitData() {
-        return this.http.get<any>('http://127.0.0.1:8080/rest/visits/getDataForVisit')
+        const accessToken = {
+            accessToken: this.getAccessToken()
+        };
+        return this.http.post<any>('http://127.0.0.1:8080/rest/visitElements/', accessToken)
             .pipe(map(visits => {
                 return visits;
             }));
@@ -670,11 +673,11 @@ export class AuthService {
     }
 
     getVisitDetails(form: GetVisitDetails) {
-        if (form.accessToken === null) {
-            return;
-        }
+        const tokenModel = {
+            accessToken: this.getAccessToken()
+        };
         return this.http.post<any>('http://127.0.0.1:8080/rest/visits/employeeVisit/' + form.visitId,
-            form).pipe(map((result) => {
+            tokenModel).pipe(map((result) => {
             return result;
         }));
     }

@@ -261,7 +261,7 @@ export interface ServiceModel {
 }
 
 export interface ServiceEditVisitModel {
-  name: String;
+  id: number;
   price: String;
   count: number;
 }

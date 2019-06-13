@@ -43,7 +43,7 @@ export class EmployeeGetNotFinishedVisitsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
+          console.log(data.visits);
           this.connection.setExpirationDate();
           this.visits = data.visits;
           for (let i = 0; i < data.visits.length; i++) {
@@ -75,7 +75,7 @@ export class EmployeeGetNotFinishedVisitsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.carPartsList = data.parts;
+          this.carPartsList = data.carParts;
           this.servicesList = data.services;
         },
         error => {
@@ -129,11 +129,11 @@ export class EmployeeGetNotFinishedVisitsComponent implements OnInit {
 
   pushService() {
     const serviceId = this.g.service.value - 1;
-
+console.log(this.g.service);
     const service: ServiceEditVisitModel = {
-      name: this.servicesList[serviceId].name,
+      id: this.g.service.value,
       price: this.g.servicePrice.value,
-      count: this.g.serviceCount.value,
+      count: this.g.serviceCount.value
     };
     this.services.push(service);
   }
@@ -168,12 +168,13 @@ export class EmployeeGetNotFinishedVisitsComponent implements OnInit {
             carParts: this.carParts,
             services: this.services,
             countYears: null,
-            status: 'for pickup',
+            status: 'for_pickup',
             accessToken: this.connection.getAccessToken()
         };
+    console.log(this.services);
 
 
-    if (this.checkOwnership()) {
+    /*if (this.checkOwnership()) {
       const form: VerificationModel = {
         accessToken: this.connection.getAccessToken(),
         car: this.visits[this.i].car,
@@ -190,7 +191,7 @@ export class EmployeeGetNotFinishedVisitsComponent implements OnInit {
       });
     } else if (this.visits[this.i].notVerifiedOwners.length !== 0) {
       return;
-    }
+    }*/
 
     console.log(visit);
 
@@ -207,7 +208,7 @@ export class EmployeeGetNotFinishedVisitsComponent implements OnInit {
       );
   }
 
-  checkOwnership(): boolean {
+  /*checkOwnership(): boolean {
     const nvo = this.visits[this.i].notVerifiedOwners;
     for (let i = 0; i < nvo.length; i++) {
       if ($('#nv' + i).prop('checked')) {
@@ -225,5 +226,5 @@ export class EmployeeGetNotFinishedVisitsComponent implements OnInit {
       }
     }
     return this.owners.length !== 0;
-  }
+  }*/
 }

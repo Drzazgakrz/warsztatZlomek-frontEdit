@@ -44,16 +44,17 @@ export class CarsComponent implements OnInit {
   }
 
   showForm(id: number, index: number) {
+      console.log(id);
       this.formDisable = true;
       this.carId = id;
       this.tableIndex = index;
 
       this.addCarForm = this.formBuilder.group({
           carBrand: [],
-          model: ['', Validators.required],
-          registrationNumber: ['', [Validators.required, Validators.pattern('[A-Z]{1,3}\\s[0-9 A-Z]{4,5}')]],
-          vin: ['', [Validators.required, Validators.pattern('[0-9]{17}')]],
-          productionYear: ['', [Validators.required, Validators.pattern('[0-9]{4}')]]
+          model: [''],
+          registrationNumber: ['', [ Validators.pattern('[A-Z]{1,3}\\s[0-9 A-Z]{4,5}')]],
+          vin: ['', [ Validators.pattern('[0-9]{17}')]],
+          productionYear: ['', [ Validators.pattern('[0-9]{4}')]]
       });
 
       this.authService.getCarBrands()
@@ -101,7 +102,7 @@ export class CarsComponent implements OnInit {
           accessToken: JSON.parse(localStorage.getItem('currentUser')),
           carId: id
       };
-
+        console.log(car);
       this.loading = true;
 
       this.authService.editCar(car)
