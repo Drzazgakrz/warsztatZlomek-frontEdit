@@ -609,7 +609,7 @@ export class AuthService {
         if (form.accessToken == null) {
             return;
         }
-        return this.http.post<any>('http://127.0.0.1:8080/rest/invoices/addProForma', form)
+        return this.http.post<any>('http://127.0.0.1:8080/rest/invoices/accept/' + form.proFormaInvoiceId, form)
             .pipe(map(result => {
                 return result;
             }));

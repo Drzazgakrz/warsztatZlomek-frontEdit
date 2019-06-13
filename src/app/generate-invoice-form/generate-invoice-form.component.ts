@@ -79,10 +79,10 @@ export class GenerateInvoiceFormComponent implements OnInit {
     let url: string;
     let invoice: string;
     if (this.router.url.includes('ProForma')) {
-      url = 'http://localhost:8080/warsztatZlomek/rest/invoice/addProFormaInvoice';
+      url = 'http://localhost:8080/rest/invoices/addProForma';
       invoice = 'ProForma';
     } else {
-      url = 'http://localhost:8080/warsztatZlomek/rest/invoice/addInvoice';
+      url = 'http://localhost:8080/rest/invoices/';
       invoice = 'VAT';
     }
     console.log(generateInvoice);

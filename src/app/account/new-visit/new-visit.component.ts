@@ -49,7 +49,7 @@ export class NewVisitComponent implements OnInit {
 
   onSubmit() {
       this.submitted = true;
-
+      console.log(this.cars);
       if (this.addVisitForm.invalid) {
           return;
       }

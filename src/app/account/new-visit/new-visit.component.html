@@ -9,7 +9,7 @@
               <div class="form-group">
                 <label >Samochód: </label>
                 <select formControlName="carId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.carId.errors }" >
-                  <option *ngFor="let car of cars" [ngValue]="car.id">{{car.registrationNumber}}, {{car.brandName}}, {{car.model}}</option>
+                  <option *ngFor="let car of cars" [ngValue]="car.carId">{{car.registrationNumber}}, {{car.brandName}}, {{car.model}}</option>
                 </select>
                 <div *ngIf="submitted && f.carId.errors" class="invalid-feedback">
                   <div *ngIf="f.carId.errors.required">Wybór samochodu jest wymagany</div>
