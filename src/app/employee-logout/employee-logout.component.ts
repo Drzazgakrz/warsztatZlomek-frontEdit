@@ -12,6 +12,8 @@ export class EmployeeLogoutComponent implements OnInit {
 
   ngOnInit() {
     this.authService.logoutEmployee();
+    alert('Nastąpiło wylogowanie');
+    window.location.href = 'http://localhost:4200/employee';
 
   }
 
