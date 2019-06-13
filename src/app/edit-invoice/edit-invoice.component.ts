@@ -36,10 +36,6 @@ export class EditInvoiceComponent implements OnInit {
     this.authService.getEmployeesVisits(token).subscribe(data => {
       this.authService.setExpirationDate();
       this.visits = data.visits;
-      this.visits.forEach(obj => {
-        const date = new Date(parseInt(obj.visitDate.valueOf(), 10));
-        obj.visitDate = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
-      });
     }, result => {
       if (result.accessToken !== null) {
         this.authService.setExpirationDate();
@@ -48,6 +44,7 @@ export class EditInvoiceComponent implements OnInit {
     this.invoiceId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     this.authService.getInvoice(this.invoiceId).subscribe((result) => {
       this.authService.setExpirationDate();
+      console.log(result);
       this.invoice = result.invoice;
       const date = new Date(this.invoice.paymentDate);
       this.invoice.paymentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
